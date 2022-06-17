@@ -3,15 +3,21 @@ package recfun
 object RecFun extends RecFunInterface:
 
   def main(args: Array[String]): Unit =
-    // println("Pascal's Triangle")
-    // for row <- 0 to 10 do
-    //   for col <- 0 to row do
-    //     print(s"${pascal(col, row)} ")
-    //   println()
+    println("Pascal's Triangle")
+    for row <- 0 to 10 do
+      for col <- 0 to row do
+        print(s"${pascal(col, row)} ")
+      println()
     
     println("Balancing parentheses")
     val spi = ":-)".toList
     println(balance(spi))
+
+    println("Counting change")
+    val money = 5
+    val denominations = List(1,2,3)
+    val count = countChange(money, denominations)
+    println(count)
 
   /**
    * Exercise 1
@@ -73,7 +79,15 @@ object RecFun extends RecFunInterface:
   // if money = 4 & coins = [1,2] then countChange should return 3
   // 3 ways to dispense change (1+1+1+1, 1+1+2, 2+2)
   def countChange(money: Int, coins: List[Int]): Int = {
-    ???
+    if (money == 0) {
+      1
+    }
+    else if (money > 0 && !coins.isEmpty) {
+      countChange(money - coins.head, coins) + countChange(money, coins.tail)
+    }
+    else {
+      0
+    }
   }
 
 
