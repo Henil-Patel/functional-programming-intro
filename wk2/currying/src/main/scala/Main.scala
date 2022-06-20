@@ -1,7 +1,5 @@
-@main def hello: Unit = 
-  println("Hello world!")
-  println(msg)
-
+@main def tester: Unit = 
+  ???
 /**
  * Note the example below:
  * Here sum returns a function sumF
@@ -22,7 +20,7 @@ def sum(f: Int => Int): (Int, Int) => Int = {
 
 def sumInts = sum(x => x)           // id func
 def sumCubes = sum(x => x * x * x)  // cube func
-def sumFactorials = sum(fact)       // sum of factorial
+def sumFactorials = sum(factorial)       // sum of factorial
 
 // Alternatively...can be called like this
 // sum(cube)(1,10) or
@@ -34,7 +32,7 @@ def sumFactorials = sum(fact)       // sum of factorial
 */
 
 def sum1(f: Int => Int)(a: Int, b: Int): Int = {
-  if a > b then 0 else f(a) + sum(f)(a+1, b)
+  if a > b then 0 else f(a) + sum1(f)(a+1, b)
 }
 
 /** Exercise:
@@ -45,3 +43,35 @@ def sum1(f: Int => Int)(a: Int, b: Int): Int = {
   * 3) Can you write a more general function, which 
   *    generalizes both sum and product?
 */
+// 1
+def product(f: Int => Int)(a: Int, b: Int): Int = {
+  if a > b then 1 else f(a) * product(f)(a+1, b)
+}
+
+// 1 alt
+def product_nest(f: Int => Int):(Int, Int) => Int = {
+  def prodF(a: Int, b: Int): Int = {
+    if a > b then 1
+    else f(a) * prodF(a + 1, b)
+  }
+  prodF
+}
+
+// 2
+def factorial(n: Int): Int = {
+  product(x => x)(1, n)
+}
+
+// 3
+def mapReduce(f: Int => Int, combine: (Int, Int) => Int, zero: Int)(a: Int, b: Int): Int = {
+  def recur(a: Int): Int = {
+    if a > b then zero
+    else combine(f(a), recur(a+1))
+  }
+  recur(a)
+}
+
+def sum(f: Int = Int) = mapReduce(f, (x, y) => x + y, 0)
+// sum(fact)(1,10)
+def product(f: Int = Int) = mapReduce(f, (x, y) => x*y, 1)
+// product(id)(1,6)
