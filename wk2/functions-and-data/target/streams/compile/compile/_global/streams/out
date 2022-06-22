@@ -1,0 +1,17 @@
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: /home/henil/Documents/Scala_1/functional-programming-intro/wk2/functions-and-data/src/main/scala/Main.scala:5:2 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m5 |[0m  makeString(addRational(Rational([31m1[0m/[31m2[0m), Rational([31m5[0m/[31m6[0m)))[0m
+[0m[[0m[31merror[0m] [0m[0m  |  [31m^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m  |  Not found: makeString[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: /home/henil/Documents/Scala_1/functional-programming-intro/wk2/functions-and-data/src/main/scala/Main.scala:5:13 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m5 |[0m  makeString(addRational(Rational([31m1[0m/[31m2[0m), Rational([31m5[0m/[31m6[0m)))[0m
+[0m[[0m[31merror[0m] [0m[0m  |             [31m^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m  |             Not found: addRational[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- Error: /home/henil/Documents/Scala_1/functional-programming-intro/wk2/functions-and-data/src/main/scala/Main.scala:5:33 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m5 |[0m  makeString(addRational(Rational([31m1[0m/[31m2[0m), Rational([31m5[0m/[31m6[0m)))[0m
+[0m[[0m[31merror[0m] [0m[0m  |                         [31m^^^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m  |missing argument for parameter y of [33mconstructor[0m [35mRational[0m in [33mclass[0m [35mRational[0m: (x: Int, y: Int): Rational[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- Error: /home/henil/Documents/Scala_1/functional-programming-intro/wk2/functions-and-data/src/main/scala/Main.scala:5:48 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m5 |[0m  makeString(addRational(Rational([31m1[0m/[31m2[0m), Rational([31m5[0m/[31m6[0m)))[0m
+[0m[[0m[31merror[0m] [0m[0m  |                                        [31m^^^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m  |missing argument for parameter y of [33mconstructor[0m [35mRational[0m in [33mclass[0m [35mRational[0m: (x: Int, y: Int): Rational[0m
+[0m[[0m[31merror[0m] [0m[0mfour errors found[0m

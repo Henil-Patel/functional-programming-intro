@@ -1,0 +1,17 @@
+[0m[[0m[0mdebug[0m] [0m[0mPackaging /home/henil/Documents/Scala_1/functional-programming-intro/wk2/functions-and-data/target/scala-3.1.2/functions-and-data_3-0.1.0-SNAPSHOT.jar ...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInput file mappings:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Rational.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/henil/Documents/Scala_1/functional-programming-intro/wk2/functions-and-data/target/scala-3.1.2/classes/Rational.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Rational.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/henil/Documents/Scala_1/functional-programming-intro/wk2/functions-and-data/target/scala-3.1.2/classes/Rational.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Main$package.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/henil/Documents/Scala_1/functional-programming-intro/wk2/functions-and-data/target/scala-3.1.2/classes/Main$package.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Main$package.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/henil/Documents/Scala_1/functional-programming-intro/wk2/functions-and-data/target/scala-3.1.2/classes/Main$package.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Main$package$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/henil/Documents/Scala_1/functional-programming-intro/wk2/functions-and-data/target/scala-3.1.2/classes/Main$package$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	tester.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/henil/Documents/Scala_1/functional-programming-intro/wk2/functions-and-data/target/scala-3.1.2/classes/tester.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	tester.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/henil/Documents/Scala_1/functional-programming-intro/wk2/functions-and-data/target/scala-3.1.2/classes/tester.class[0m
+[0m[[0m[0mdebug[0m] [0m[0mDone packaging.[0m
