@@ -89,3 +89,4 @@ WARNING: Unmatched cancel notification for request id 14
 2022.06.22 19:02:09 WARN  no build target for: /home/henil/Documents/Scala_1/functional-programming-intro/wk2/functions-and-data/src/main/scala/Main.scala[0m
 2022.06.22 19:02:40 WARN  no build target for: /home/henil/Documents/Scala_1/functional-programming-intro/wk2/functions-and-data/src/main/scala/Main.scala[0m
 2022.06.22 19:04:33 WARN  no build target for: /home/henil/Documents/Scala_1/functional-programming-intro/wk2/functions-and-data/src/main/scala/Main.scala[0m
+2022.07.01 11:14:45 INFO  shutting down Metals[0m
