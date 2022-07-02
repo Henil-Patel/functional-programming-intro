@@ -37,12 +37,12 @@ trait FunSets extends FunSetsInterface:
    * Returns the difference of the two given sets,
    * the set of all elements of `s` that are not in `t`.
    */
-  def diff(s: FunSet, t: FunSet): FunSet = (n: Int) => ???
+  def diff(s: FunSet, t: FunSet): FunSet = (n: Int) => contains(s, n) && !contains(t, n)
 
   /**
    * Returns the subset of `s` for which `p` holds.
    */
-  def filter(s: FunSet, p: Int => Boolean): FunSet = ???
+  def filter(s: FunSet, p: Int => Boolean): FunSet = (n: Int) => contains(s,n) && p(n)
 
 
   /**
@@ -55,19 +55,21 @@ trait FunSets extends FunSetsInterface:
    */
   def forall(s: FunSet, p: Int => Boolean): Boolean =
     def iter(a: Int): Boolean =
-      if ??? then
-        ???
-      else if ??? then
-        ???
-      else
-        iter(???)
-    iter(???)
+      if (a > 1000) then True
+      else if (!p(a) && s(a)) then False
+      else iter(a + 1)
+    iter(-bound)
 
   /**
    * Returns whether there exists a bounded integer within `s`
    * that satisfies `p`.
    */
-  def exists(s: FunSet, p: Int => Boolean): Boolean = ???
+  def exists(s: FunSet, p: Int => Boolean): Boolean = 
+    def iter(a: Int): Boolean =
+      if (a > 1000) then False
+      else if (p(a) && s(a)) then True
+      else iter(a + 1)
+    iter(-bound)
 
   /**
    * Returns a set transformed by applying `f` to each element of `s`.
