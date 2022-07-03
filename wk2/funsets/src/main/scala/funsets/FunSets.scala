@@ -66,7 +66,7 @@ trait FunSets extends FunSetsInterface:
    */
   def exists(s: FunSet, p: Int => Boolean): Boolean = 
     def iter(a: Int): Boolean =
-      if (a > 1000) then False
+      if (a > bound) then False
       else if (p(a) && s(a)) then True
       else iter(a + 1)
     iter(-bound)
@@ -74,7 +74,12 @@ trait FunSets extends FunSetsInterface:
   /**
    * Returns a set transformed by applying `f` to each element of `s`.
    */
-  def map(s: FunSet, f: Int => Int): FunSet = ???
+  def map(s: FunSet, f: Int => Int): FunSet =
+    def iter(a: Int): FunSet =
+      if (a > bound) then n => False
+      else if (contains(s, a)) then n => f(n)
+      else iter(a + 1)
+    iter(-bound)
 
   /**
    * Displays the contents of a set
