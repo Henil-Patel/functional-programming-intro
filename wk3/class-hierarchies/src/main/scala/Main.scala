@@ -16,7 +16,13 @@ abstract class IntSet:
 end IntSet
 
 
-
+object IntSet:
+  // No args
+  def apply(): IntSet = Empty
+  // One arg
+  def apply(x: Int): IntSet = Empty.incl(x)
+  // Two args
+  def apply(x: Int, y: Int): IntSet = Empty.incl(x).incl(y)
 // abstract class IntSet:
 //   def incl(x: Int): IntSet
 //   def contains(x: Int): Boolean
