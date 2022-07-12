@@ -124,9 +124,11 @@ class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet:
   def filterAcc(p: Tweet => Boolean, acc: TweetSet): TweetSet = 
     if (p(elem))
       val rightAcc = right.filterAcc(p, acc.incl(elem))
+      left.filterAcc(p, rightAcc)
+
     else 
       val rightAcc = right.filterAcc(p, acc)
-    left.filterAcc(p, rightAcc)
+      left.filterAcc(p, rightAcc)
 
   /**
    * The following methods are already implemented
