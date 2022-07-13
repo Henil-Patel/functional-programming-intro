@@ -64,7 +64,7 @@ abstract class TweetSet extends TweetSetInterface:
    * Question: Should we implement this method here, or should it remain abstract
    * and be implemented in the subclasses?
    */
-  def mostRetweeted: Tweet = ???
+  def mostRetweeted: Tweet
 
   /**
    * Returns a list containing all tweets of this set, sorted by retweet count
@@ -109,6 +109,8 @@ class Empty extends TweetSet:
 
   def union(that: TweetSet): TweetSet = that
 
+  def mostRetweeted: Tweet = throw new NoSuchElementException("Empty set")
+
   /**
    * The following methods are already implemented
    */
@@ -132,8 +134,12 @@ class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet:
       val rightAcc = right.filterAcc(p, acc)
       left.filterAcc(p, rightAcc)
 
-  def union(that: TweetSet): TweetSet = left.union(right).union(that).incl(elem)
+  def union(that: TweetSet): TweetSet = left.union(right.union(that.incl(elem)))
 
+  def mostRetweeted: Tweet = ???
+    // What is p?
+    // tw => tw.retweets > right.mostRetweeted() ----- this would be to get the most tweeted on the right side of the tree?
+    // tw => tw.retweets > left.mostRetweeted()
   /**
    * The following methods are already implemented
    */
