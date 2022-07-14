@@ -109,6 +109,8 @@ class Empty extends TweetSet:
 
   def union(that: TweetSet): TweetSet = that
 
+  def isEmpty: Boolean = true
+
   def mostRetweeted: Tweet = throw new NoSuchElementException("Empty set")
 
   /**
@@ -140,11 +142,17 @@ class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet:
 
   def union(that: TweetSet): TweetSet = left.union(right.union(that.incl(elem)))
 
-  def mostRetweeted: Tweet = ???
-    // What is p?
-    // tw => tw.retweets > right.mostRetweeted() ----- this would be to get the most tweeted on the right side of the tree?
-    // tw => tw.retweets > left.mostRetweeted()
-    
+  def isEmpty: Boolean = false
+
+  def mostRetweeted: Tweet = 
+
+    if (this.isEmpty == true)
+      0
+    else
+      if (elem.retweets > right.mostRetweeted)
+        elem
+      else
+        right.mostRetweeted
 
   /**
    * The following methods are already implemented
