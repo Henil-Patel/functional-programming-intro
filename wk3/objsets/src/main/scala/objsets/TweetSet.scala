@@ -127,11 +127,15 @@ class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet:
 
   def filterAcc(p: Tweet => Boolean, acc: TweetSet): TweetSet = 
     if (p(elem))
+      // since p is true, add elem to acc set; also apply recursively to right subset
       val rightAcc = right.filterAcc(p, acc.incl(elem))
+      // take tweets accumulated from right subset and pass to left subset with same predicate
       left.filterAcc(p, rightAcc)
 
     else 
+      // since p is false, don't add elem to acc set; apply recursively to right subset
       val rightAcc = right.filterAcc(p, acc)
+      // take tweets accumulated from right subset and pass to left subset with same predicate
       left.filterAcc(p, rightAcc)
 
   def union(that: TweetSet): TweetSet = left.union(right.union(that.incl(elem)))
@@ -140,6 +144,8 @@ class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet:
     // What is p?
     // tw => tw.retweets > right.mostRetweeted() ----- this would be to get the most tweeted on the right side of the tree?
     // tw => tw.retweets > left.mostRetweeted()
+    
+
   /**
    * The following methods are already implemented
    */
