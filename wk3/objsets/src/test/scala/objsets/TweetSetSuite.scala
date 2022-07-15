@@ -48,12 +48,19 @@ class TweetSetSuite extends munit.FunSuite:
       assertEquals(size(set1.union(set5)), 4)
   }
 
-  test("descending: set5") {
+  test("mostRetweeted: of set 5") {
     new TestSets:
-      val trends = set5.descendingByRetweet
-      assert(!trends.isEmpty)
-      assert(trends.head.user == "a" || trends.head.user == "b")
+      //assertEquals(set5.mostRetweeted, Tweet("b", "b body", 20))
+      println("Testing mostRetweeted logic")
+      println(set5.mostRetweeted)
   }
+
+  // test("descending: set5") {
+  //   new TestSets:
+  //     val trends = set5.descendingByRetweet
+  //     assert(!trends.isEmpty)
+  //     assert(trends.head.user == "a" || trends.head.user == "b")
+  // }
 
 
   import scala.concurrent.duration.*

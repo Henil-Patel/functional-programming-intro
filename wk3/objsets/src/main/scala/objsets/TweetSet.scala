@@ -66,6 +66,8 @@ abstract class TweetSet extends TweetSetInterface:
    */
   def mostRetweeted: Tweet
 
+  def isEmpty: Boolean
+
   /**
    * Returns a list containing all tweets of this set, sorted by retweet count
    * in descending order. In other words, the head of the resulting list should
@@ -146,13 +148,45 @@ class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet:
 
   def mostRetweeted: Tweet = 
 
-    if (this.isEmpty == true)
-      0
+    val le = left.isEmpty
+    val re = right.isEmpty
+    val lt = left.mostRetweeted.retweets
+    val rt = right.mostRetweeted.retweets
+    val ct = elem.retweets
+
+    if (le && re)
+      elem
+    else 
+      if (!le && le.mostRetweeted.retweets > elem.retweets)
+        if (!re && le.mostRetweeted.retweets > re.mostRetweeted.retweets)
+          le
+        else
+          re
+      else
+
+
+    
+    
+    
+
+
+
+
+
+    //println("set empty? " + this.isEmpty)
+    if (right.isEmpty == true)
+      println("Node reached")
+      Tweet("null", "null", 0)
+    
     else
-      if (elem.retweets > right.mostRetweeted)
+      println(elem.retweets)
+
+      val rTweet = right.mostRetweeted
+      //val lTweet = left.mostRetweeted
+      if (elem.retweets > rTweet.retweets)
         elem
       else
-        right.mostRetweeted
+        rTweet
 
   /**
    * The following methods are already implemented
