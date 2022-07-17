@@ -66,6 +66,8 @@ abstract class TweetSet extends TweetSetInterface:
    */
   def mostRetweeted: Tweet
 
+  def mostRetweetedAcc(t: Tweet): Tweet
+
   def isEmpty: Boolean
 
   /**
@@ -115,6 +117,7 @@ class Empty extends TweetSet:
 
   def mostRetweeted: Tweet = throw new NoSuchElementException("Empty set")
 
+  def mostRetweetedAcc(t: Tweet): Tweet = t
   /**
    * The following methods are already implemented
    */
@@ -147,23 +150,14 @@ class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet:
   def isEmpty: Boolean = false
 
   def mostRetweeted: Tweet = 
+    mostRetweetedAcc(elem)
 
-    val le: Boolean = left.isEmpty
-    val re: Boolean = right.isEmpty
-    val lt: Tweet = left.mostRetweeted
-    val rt: Tweet = right.mostRetweeted
-
-    if (!le && lt.retweets > elem.retweets)
-      if (!re && lt.retweets > rt.retweets)
-        lt
-      else
-        rt
-    else if (!re && rt.retweets > elem.retweets)
-      rt
+  def mostRetweetedAcc(t: Tweet): Tweet = 
+    if (t.retweets > elem.retweets)
+      right.mostRetweetedAcc(left.mostRetweetedAcc(t))
     else
-      elem
+      right.mostRetweetedAcc(left.mostRetweetedAcc(elem))
 
-    
 
   /**
    * The following methods are already implemented
