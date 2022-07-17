@@ -148,45 +148,22 @@ class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet:
 
   def mostRetweeted: Tweet = 
 
-    val le = left.isEmpty
-    val re = right.isEmpty
-    val lt = left.mostRetweeted.retweets
-    val rt = right.mostRetweeted.retweets
-    val ct = elem.retweets
+    val le: Boolean = left.isEmpty
+    val re: Boolean = right.isEmpty
+    val lt: Tweet = left.mostRetweeted
+    val rt: Tweet = right.mostRetweeted
 
-    if (le && re)
-      elem
-    else 
-      if (!le && le.mostRetweeted.retweets > elem.retweets)
-        if (!re && le.mostRetweeted.retweets > re.mostRetweeted.retweets)
-          le
-        else
-          re
+    if (!le && lt.retweets > elem.retweets)
+      if (!re && lt.retweets > rt.retweets)
+        lt
       else
-
-
-    
-    
-    
-
-
-
-
-
-    //println("set empty? " + this.isEmpty)
-    if (right.isEmpty == true)
-      println("Node reached")
-      Tweet("null", "null", 0)
-    
+        rt
+    else if (!re && rt.retweets > elem.retweets)
+      rt
     else
-      println(elem.retweets)
+      elem
 
-      val rTweet = right.mostRetweeted
-      //val lTweet = left.mostRetweeted
-      if (elem.retweets > rTweet.retweets)
-        elem
-      else
-        rTweet
+    
 
   /**
    * The following methods are already implemented
