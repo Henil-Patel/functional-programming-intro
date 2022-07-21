@@ -50,9 +50,7 @@ class TweetSetSuite extends munit.FunSuite:
 
   test("mostRetweeted: of set 5") {
     new TestSets:
-      //assertEquals(set5.mostRetweeted, Tweet("b", "b body", 20))
-      println("Testing mostRetweeted logic")
-      println(set5.mostRetweeted)
+      assert(set5.mostRetweeted.user == "a" || set5.mostRetweeted.user == "b")
   }
 
   // test("descending: set5") {
