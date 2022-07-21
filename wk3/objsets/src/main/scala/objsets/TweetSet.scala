@@ -67,6 +67,8 @@ abstract class TweetSet extends TweetSetInterface:
   def mostRetweeted: Tweet
 
   def mostRetweetedAcc(t: Tweet): Tweet
+
+  def isEmpty: Boolean
   
   /**
    * Returns a list containing all tweets of this set, sorted by retweet count
