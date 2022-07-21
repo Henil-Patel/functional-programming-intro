@@ -144,10 +144,8 @@ class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet:
     mostRetweetedAcc(elem)
 
   def mostRetweetedAcc(t: Tweet): Tweet = 
-    if (t.retweets > elem.retweets)
-      right.mostRetweetedAcc(left.mostRetweetedAcc(t))
-    else
-      right.mostRetweetedAcc(left.mostRetweetedAcc(elem))
+    val input = if (t.retweets > elem.retweets) then t else elem
+    right.mostRetweetedAcc(left.mostRetweetedAcc(input))
 
   /**
    * The following methods are already implemented
