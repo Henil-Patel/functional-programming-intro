@@ -67,9 +67,7 @@ abstract class TweetSet extends TweetSetInterface:
   def mostRetweeted: Tweet
 
   def mostRetweetedAcc(t: Tweet): Tweet
-
-  def isEmpty: Boolean
-
+  
   /**
    * Returns a list containing all tweets of this set, sorted by retweet count
    * in descending order. In other words, the head of the resulting list should
@@ -79,7 +77,12 @@ abstract class TweetSet extends TweetSetInterface:
    * Question: Should we implement this method here, or should it remain abstract
    * and be implemented in the subclasses?
    */
-  def descendingByRetweet: TweetList = ???
+  def descendingByRetweet: TweetList = 
+    if (this.isEmpty)
+      Nil
+    else
+      val mostrt = this.mostRetweeted
+      Cons(mostrt, this.remove(mostrt).descendingByRetweet)
 
   /**
    * The following methods are already implemented
@@ -113,11 +116,11 @@ class Empty extends TweetSet:
 
   def union(that: TweetSet): TweetSet = that
 
-  def isEmpty: Boolean = true
-
   def mostRetweeted: Tweet = throw new NoSuchElementException("Empty set")
 
   def mostRetweetedAcc(t: Tweet): Tweet = t
+
+  def isEmpty: Boolean = true
   /**
    * The following methods are already implemented
    */
@@ -138,14 +141,14 @@ class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet:
     
   def union(that: TweetSet): TweetSet = left.union(right.union(that.incl(elem)))
 
-  def isEmpty: Boolean = false
-
   def mostRetweeted: Tweet = 
     mostRetweetedAcc(elem)
 
   def mostRetweetedAcc(t: Tweet): Tweet = 
     val input = if (t.retweets > elem.retweets) then t else elem
     right.mostRetweetedAcc(left.mostRetweetedAcc(input))
+
+  def isEmpty: Boolean = false
 
   /**
    * The following methods are already implemented
