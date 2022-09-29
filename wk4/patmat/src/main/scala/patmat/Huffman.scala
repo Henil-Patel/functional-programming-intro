@@ -71,7 +71,42 @@ trait Huffman extends HuffmanInterface:
    *       println("integer is  : "+ theInt)
    *   }
    */
-  def times(chars: List[Char]): List[(Char, Int)] = ???
+  def times(chars: List[Char]): List[(Char, Int)] = {
+    val accList = List[(Char, Int)]()
+    
+    def iter(chars: List[Char], acc: List[(Char, Int)]): List[(Char, Int)] = {
+      // Check base case / exit condition
+      if (chars.isEmpty) {
+        acc
+      }
+      // Check if acc List contains char elements
+      else {
+        // First entry in accumulator
+        if (acc.isEmpty) {
+          (chars.head, 1) :: acc
+          iter(chars.tail, acc)
+        }
+        else {
+          // call counter
+          val accElem = acc.head
+          val resTup = counter(chars, acc)
+          resTup::acc
+        }
+        
+      }
+    
+    }
+    // check how many times it occurs and pack into tuple
+    def counter(chars: List[Char], acc: (Char, Int)): (Char, Int) = {
+      acc.head match {
+        case (theChar, theInt) =>
+          if (theChar.equals(char)) (char, theInt + 1)
+          else if (chars.isEmpty)
+          else(chars.tail, acc)
+      }
+    }
+    iter(chars, accList)
+  }
 
   /**
    * Returns a list of `Leaf` nodes for a given frequency table `freqs`.
