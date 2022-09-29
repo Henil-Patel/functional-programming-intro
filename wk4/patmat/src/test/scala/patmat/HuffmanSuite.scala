@@ -6,6 +6,7 @@ class HuffmanSuite extends munit.FunSuite:
   trait TestTrees {
     val t1 = Fork(Leaf('a',2), Leaf('b',3), List('a','b'), 5)
     val t2 = Fork(Fork(Leaf('a',2), Leaf('b',3), List('a','b'), 5), Leaf('d',4), List('a','b','d'), 9)
+    val l1 = List('a', 'b', 'a', 'a')
   }
 
 
@@ -25,6 +26,10 @@ class HuffmanSuite extends munit.FunSuite:
   }
 
   // TODO: ADD CHARACTER FREQUENCY TEST (TIMES)
+
+  test("times") {
+    assertEquals(times(l1), List(('a', 3), ('b', 1)))
+  }
 
 
   test("make ordered leaf list for some frequency table (15pts)") {

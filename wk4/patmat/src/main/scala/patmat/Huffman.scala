@@ -82,29 +82,34 @@ trait Huffman extends HuffmanInterface:
       // Check if acc List contains char elements
       else {
         // First entry in accumulator
+        val charElem = chars.head
         if (acc.isEmpty) {
-          (chars.head, 1) :: acc
-          iter(chars.tail, acc)
+          iter(chars.tail, (charElem, 1) :: acc)
+)
         }
         else {
           // call counter
-          val accElem = acc.head
-          val resTup = counter(chars, acc)
-          resTup::acc
+          val result = counter(charElem , acc)
+          iter(chars.tail, (charElem, result) :: acc)
         }
-        
       }
     
     }
-    // check how many times it occurs and pack into tuple
-    def counter(chars: List[Char], acc: (Char, Int)): (Char, Int) = {
+
+    def counter(char: Char, acc: List[(Char, Int)]): (Char, Int) = {
       acc.head match {
-        case (theChar, theInt) =>
+        case (theChar, theInt) => 
+          // match found
           if (theChar.equals(char)) (char, theInt + 1)
-          else if (chars.isEmpty)
-          else(chars.tail, acc)
+          // no match found 
+          else if (acc.tail.isEmpty) (char, 1)
+          // next
+          else counter(char, acc.tail)
+
       }
     }
+
+
     iter(chars, accList)
   }
 
