@@ -71,46 +71,21 @@ trait Huffman extends HuffmanInterface:
    *       println("integer is  : "+ theInt)
    *   }
    */
-  def times(chars: List[Char]): List[(Char, Int)] = {
-    val accList = List[(Char, Int)]()
-    
-    def iter(chars: List[Char], acc: List[(Char, Int)]): List[(Char, Int)] = {
-      // Check base case / exit condition
-      if (chars.isEmpty) {
-        acc
-      }
-      // Check if acc List contains char elements
-      else {
-        // First entry in accumulator
-        val charElem = chars.head
-        if (acc.isEmpty) {
-          iter(chars.tail, (charElem, 1) :: acc)
-)
-        }
-        else {
-          // call counter
-          val result = counter(charElem , acc)
-          iter(chars.tail, (charElem, result) :: acc)
-        }
-      }
-    
-    }
-
-    def counter(char: Char, acc: List[(Char, Int)]): (Char, Int) = {
-      acc.head match {
-        case (theChar, theInt) => 
-          // match found
-          if (theChar.equals(char)) (char, theInt + 1)
-          // no match found 
-          else if (acc.tail.isEmpty) (char, 1)
-          // next
-          else counter(char, acc.tail)
-
+  def times(chars: List[Char]): List[(Char, Int)] = {    
+    def iter(char: Char, res: List[(Char, Int)]): List[(Char, Int)] = {
+      res match {
+        case Nil => List((char, 1))
+        case y::ys => if (y.equals(char)) (char, y._2 + 1) :: res else (y._1, y._2) :: iter(char, res.tail)
       }
     }
 
+    
 
-    iter(chars, accList)
+
+    chars match {
+      case Nil => Nil
+      case x::xs => iter(x, times(xs))
+    }
   }
 
   /**
