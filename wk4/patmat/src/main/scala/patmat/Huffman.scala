@@ -75,12 +75,9 @@ trait Huffman extends HuffmanInterface:
     def iter(char: Char, res: List[(Char, Int)]): List[(Char, Int)] = {
       res match {
         case Nil => List((char, 1))
-        case y::ys => if (y.equals(char)) (char, y._2 + 1) :: res else (y._1, y._2) :: iter(char, res.tail)
+        case y::ys => if (y._1.equals(char)) (y._1, y._2 + 1) :: res else (y._1, y._2) :: iter(char, res.tail)
       }
     }
-
-    
-
 
     chars match {
       case Nil => Nil
@@ -95,7 +92,14 @@ trait Huffman extends HuffmanInterface:
    * head of the list should have the smallest weight), where the weight
    * of a leaf is the frequency of the character.
    */
-  def makeOrderedLeafList(freqs: List[(Char, Int)]): List[Leaf] = ???
+  def makeOrderedLeafList(freqs: List[(Char, Int)]): List[Leaf] = 
+
+
+    freqs match {
+      case Nil => Nil
+      case x::xs => iter(x, makeOrderedLeafList(xs))
+    }
+
 
   /**
    * Checks whether the list `trees` contains only one single code tree.
