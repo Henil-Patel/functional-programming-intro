@@ -30,8 +30,7 @@ class HuffmanSuite extends munit.FunSuite:
   test("times") {
     val l1 = List('a', 'b', 'c')      // to check order
     val l2 = List('a', 'b', 'a')      // to check duplicates
-    println(times(l2))
-    // assertEquals(times(l1), List(('a', 3), ('b', 1)))
+    assertEquals(times(l2), List(('a', 2), ('b', 1)))
   }
 
 

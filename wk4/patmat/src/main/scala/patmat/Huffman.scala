@@ -75,13 +75,13 @@ trait Huffman extends HuffmanInterface:
     def iter(char: Char, res: List[(Char, Int)]): List[(Char, Int)] = {
       res match {
         case Nil => List((char, 1))
-        case y::ys => if (y._1.equals(char)) (y._1, y._2 + 1) :: res else (y._1, y._2) :: iter(char, res.tail)
+        case y::ys => if (char.equals(y._1)) (y._1, y._2 + 1) :: ys else (y._1, y._2) :: iter(char, ys)
       }
     }
 
     chars match {
       case Nil => Nil
-      case x::xs => iter(x, times(xs))
+      case x :: xs => iter(x, times(xs))
     }
   }
 
@@ -94,11 +94,19 @@ trait Huffman extends HuffmanInterface:
    */
   def makeOrderedLeafList(freqs: List[(Char, Int)]): List[Leaf] = 
 
+    def iter(x: (Char, Int), res: List[Leaf]): List[Leaf] = {
+      res match {
+        case Nil => List(Leaf(x._1, x._2))
+        case y :: ys => if (x._2 <= y._2) Leaf(x._1, x._2) :: res else Leaf(y._1, y._2) :: iter(x, ys)
+      }
+    }
 
     freqs match {
       case Nil => Nil
-      case x::xs => iter(x, makeOrderedLeafList(xs))
+      case x :: xs => iter(x, makeOrderedLeafList(xs))
     }
+
+
 
 
   /**
