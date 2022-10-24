@@ -111,6 +111,7 @@ trait Huffman extends HuffmanInterface:
    */
   def singleton(trees: List[CodeTree]): Boolean = 
     if (trees.size == 1) True else False
+    
   /**
    * The parameter `trees` of this function is a list of code trees ordered
    * by ascending weights.
@@ -123,7 +124,9 @@ trait Huffman extends HuffmanInterface:
    * If `trees` is a list of less than two elements, that list should be returned
    * unchanged.
    */
-  def combine(trees: List[CodeTree]): List[CodeTree] = ???
+  def combine(trees: List[CodeTree]): List[CodeTree] = 
+    if singleton(trees) then trees
+    else Fork()
 
   /**
    * This function will be called in the following way:
