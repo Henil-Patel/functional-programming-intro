@@ -125,8 +125,9 @@ trait Huffman extends HuffmanInterface:
    * unchanged.
    */
   def combine(trees: List[CodeTree]): List[CodeTree] = 
-    if singleton(trees) then trees
-    else Fork()
+    trees match {
+      case Nil | x :: Nil => trees 
+    }
 
   /**
    * This function will be called in the following way:
