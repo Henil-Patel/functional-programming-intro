@@ -127,6 +127,7 @@ trait Huffman extends HuffmanInterface:
   def combine(trees: List[CodeTree]): List[CodeTree] = 
     trees match {
       case Nil | x :: Nil => trees 
+      
     }
 
   /**
