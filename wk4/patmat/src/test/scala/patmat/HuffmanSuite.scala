@@ -43,7 +43,8 @@ class HuffmanSuite extends munit.FunSuite:
   }
 
   test("check until iterator") {
-    val outList = ???
+    val inList = List(Leaf('e', 1), Leaf('t', 2), Leaf('x', 4))
+    assertEquals(until(singleton, combine)(inList), List(Fork(Fork(Leaf('e',1),Leaf('t',2),List('e', 't'),3), Leaf('x', 4), List('e', 't', 'x'), 7)))
   }
 
   test("decode and encode a very short text should be identity (10pts)") {
