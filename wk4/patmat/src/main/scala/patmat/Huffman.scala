@@ -126,10 +126,9 @@ trait Huffman extends HuffmanInterface:
    */
   def combine(trees: List[CodeTree]): List[CodeTree] = 
     trees match {
-      case Nil => trees
-      case x :: Nil => trees 
-      case x :: y :: zs => if (weight(x) < weight(y)) Fork(x, y, chars(x):::chars(y), weight(x) + weight(y)) :: zs
-                           else Fork(y, x, chars(x) ::: chars(y), weight(x) + weight(y)) :: zs
+      case _ => trees
+      case x :: y :: zs => if (weight(x) < weight(y)) makeCodeTree(x,y) :: zs
+                           else makeCodeTree(y,x) :: zs
     }
 
   /**
