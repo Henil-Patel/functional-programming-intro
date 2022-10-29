@@ -25,8 +25,6 @@ class HuffmanSuite extends munit.FunSuite:
     assertEquals(string2Chars("hello, world"), List('h', 'e', 'l', 'l', 'o', ',', ' ', 'w', 'o', 'r', 'l', 'd'))
   }
 
-  // TODO: ADD CHARACTER FREQUENCY TEST (TIMES)
-
   test("times") {
     val l1 = List('a', 'b', 'c')      // to check order
     val l2 = List('a', 'b', 'a')      // to check duplicates
@@ -44,6 +42,9 @@ class HuffmanSuite extends munit.FunSuite:
     assertEquals(combine(leaflist), List(Fork(Leaf('e',1),Leaf('t',2),List('e', 't'),3), Leaf('x',4)))
   }
 
+  test("check until iterator") {
+    val outList = ???
+  }
 
   test("decode and encode a very short text should be identity (10pts)") {
     new TestTrees:
