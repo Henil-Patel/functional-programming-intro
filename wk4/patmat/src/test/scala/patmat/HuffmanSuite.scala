@@ -47,6 +47,12 @@ class HuffmanSuite extends munit.FunSuite:
     assertEquals(until(singleton, combine)(inList), List(Fork(Fork(Leaf('e',1),Leaf('t',2),List('e', 't'),3), Leaf('x', 4), List('e', 't', 'x'), 7)))
   }
 
+  test("check correct CodeTree is created") {
+    val chars = List('a', 'b', 'a', 'a', 'c')
+    println(createCodeTree(chars))
+    //assertEquals(createCodeTree(chars), Fork())
+  }
+
   test("decode and encode a very short text should be identity (10pts)") {
     new TestTrees:
       assertEquals(decode(t1, encode(t1)("ab".toList)), "ab".toList)
