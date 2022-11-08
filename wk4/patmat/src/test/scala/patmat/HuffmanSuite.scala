@@ -48,9 +48,8 @@ class HuffmanSuite extends munit.FunSuite:
   }
 
   test("check correct CodeTree is created") {
-    val chars = List('a', 'b', 'a', 'a', 'c')
-    println(createCodeTree(chars))
-    //assertEquals(createCodeTree(chars), Fork())
+    val chars = List('a', 'a', 'a', 'b', 'c')
+    assertEquals(createCodeTree(chars), Fork(Fork(Leaf('b', 1), Leaf('c', 1), List('b', 'c'), 2), Leaf('a', 3), List('b', 'c', 'a'), 5))
   }
 
   test("decode and encode a very short text should be identity (10pts)") {
