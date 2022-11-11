@@ -163,7 +163,34 @@ trait Huffman extends HuffmanInterface:
    * This function decodes the bit sequence `bits` using the code tree `tree` and returns
    * the resulting list of characters.
    */
-  def decode(tree: CodeTree, bits: List[Bit]): List[Char] = ???
+  def decode(tree: CodeTree, bits: List[Bit]): List[Char] = 
+    def iter(tree: CodeTree, bits: List[Bit], res: List[Char]): List[Char] = {
+      bits match {
+        case Nil => res
+        case x :: xs => 
+          if (x == 0){
+            println("Got a 0")
+            val out = tree match {
+              case Leaf(c ,w) => c :: res                          
+              case Fork(l, r, c, w) => iter(l, xs, res) 
+            }
+            out
+            //iter(tree, xs, out)
+          }         // match left; got 0
+          else{
+            println("Got a 1")
+            val out = tree match {
+              case Leaf(c, w) => c :: res
+              case Fork(l, r, c, w) => iter(r, xs, res)
+            }
+            out
+            // iter(tree, xs, out)
+          }        // match right; got 1
+          
+      }
+    }
+    val res: List[Char] = List()
+    iter(tree, bits, res)
 
   /**
    * A Huffman coding tree for the French language.
