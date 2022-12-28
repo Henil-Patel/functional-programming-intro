@@ -205,18 +205,19 @@ trait Huffman extends HuffmanInterface:
       active_tree match {
         case Leaf(c, w) => List()
         case Fork(l, r, c, w) => 
-          if (chars(l).contains(active_char)) {
+          if (chars(l).contains(active_char)) 
+          {
             0 :: iter(l, active_char)
           }
-          else if (chars(r).contains(active_char)) {
+          // if (chars(r).contains(active_char))
+          else 
+          {
             1 :: iter(r, active_char)
           }
       }
     }
-    if (!text.tail.isEmpty)
-      val out = iter(tree, text.head)::encode(tree)(text.tail)
-    else
-      out
+    if (!text.tail.isEmpty) iter(tree, text.head) ::: encode(tree)(text.tail)
+    else iter(tree, text.head)
 
   // Part 4b: Encoding using code table
 
