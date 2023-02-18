@@ -229,18 +229,13 @@ trait Huffman extends HuffmanInterface:
    */
   def codeBits(table: CodeTable)(char: Char): List[Bit] = 
 
-    if (!table.isEmpty) {
-      table match {
-        case x :: xs => 
-          if (x._1.equals(char)) x._2
-          else codeBits(xs)(char)
-        case _ => List()
-      }
+    table match {
+      case x :: xs => 
+        if (x._1.equals(char)) x._2
+        else codeBits(xs)(char)
+      case _ => Nil
     }
-    else {
-      List()
-    }
-
+  
   /**
    * Given a code tree, create a code table which contains, for every character in the
    * code tree, the sequence of bits representing that character.
@@ -249,7 +244,17 @@ trait Huffman extends HuffmanInterface:
    * a valid code tree that can be represented as a code table. Using the code tables of the
    * sub-trees, think of how to build the code table for the entire tree.
    */
-  def convert(tree: CodeTree): CodeTable = ???
+  def convert(tree: CodeTree): CodeTable = 
+
+    def iter(subTree: CodeTree, weight: List[Bit]): CodeTable = 
+      subTree match {
+        case Leaf(char, _) => List((char, weight))
+        case Fork(left, right, _, _) => iter(left, weight ::: (0 :: Nil)) ++ iter(right, weight ::: (1 :: Nil))
+      }
+    
+    iter(tree, List[Bit]())
+
+    
 
   /**
    * This function takes two code tables and merges them into one. Depending on how you
