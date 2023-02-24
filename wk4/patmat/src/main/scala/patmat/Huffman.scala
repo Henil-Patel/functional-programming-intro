@@ -246,13 +246,19 @@ trait Huffman extends HuffmanInterface:
    */
   def convert(tree: CodeTree): CodeTable = 
 
-    def iter(subTree: CodeTree, weight: List[Bit]): CodeTable = 
-      subTree match {
-        case Leaf(char, _) => List((char, weight))
-        case Fork(left, right, _, _) => iter(left, weight ::: (0 :: Nil)) ++ iter(right, weight ::: (1 :: Nil))
-      }
+    tree match {
+      case Leaf(char, _) => List((char, Nil))
+      case Fork(left, right, _, _) => mergeCodeTables(convert(left), convert(right))
+    }
+
+    // def iter(subTree: CodeTree, weight: List[Bit]): CodeTable = 
+
+    //   subTree match {
+    //     case Leaf(char, _) => List((char, weight))
+    //     case Fork(left, right, _, _) => iter(left, weight ::: (0 :: Nil)) ++ iter(right, weight ::: (1 :: Nil))
+    //   }
     
-    iter(tree, List[Bit]())
+    // iter(tree, List[Bit]())
 
     
 
@@ -261,7 +267,13 @@ trait Huffman extends HuffmanInterface:
    * use it in the `convert` method above, this merge method might also do some transformations
    * on the two parameter code tables.
    */
-  def mergeCodeTables(a: CodeTable, b: CodeTable): CodeTable = ???
+  def mergeCodeTables(a: CodeTable, b: CodeTable): CodeTable = 
+    def iter(c: CodeTable, bit: Bit): CodeTable = 
+      c match {
+        case x :: xs => (x._1, bit :: x._2) :: (iter(xs, bit))
+        case _ => Nil
+      }
+    iter(a, 0) ++ iter(b, 1)
 
   /**
    * This function encodes `text` according to the code tree `tree`.
@@ -269,6 +281,12 @@ trait Huffman extends HuffmanInterface:
    * To speed up the encoding process, it first converts the code tree to a code table
    * and then uses it to perform the actual encoding.
    */
-  def quickEncode(tree: CodeTree)(text: List[Char]): List[Bit] = ???
-
+  def quickEncode(tree: CodeTree)(text: List[Char]): List[Bit] = 
+    val t = convert(tree)
+    def iter(table: CodeTable, text: List[Char]): List[Bit] = 
+      table match {
+        case x :: xs => codeBits(List(x))(text.head) ++ iter(xs, text.tail)
+        case _ => Nil
+      }
+    iter(t, text)
 object Huffman extends Huffman
