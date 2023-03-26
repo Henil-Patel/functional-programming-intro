@@ -126,8 +126,7 @@ trait Huffman extends HuffmanInterface:
    */
   def combine(trees: List[CodeTree]): List[CodeTree] = 
     trees match {
-      case x :: y :: zs => if (weight(x) < weight(y)) makeCodeTree(x, y) :: zs
-                           else makeCodeTree(y, x) :: zs
+      case x :: y :: zs => (makeCodeTree(x, y) :: zs).sortBy(weight)
       case _ => trees
     }
 
@@ -152,7 +151,7 @@ trait Huffman extends HuffmanInterface:
    * frequencies from that text and creates a code tree based on them.
    */
   def createCodeTree(chars: List[Char]): CodeTree = 
-    until(singleton, combine)(makeOrderedLeafList(times(chars))).head
+    (until(singleton, combine)(makeOrderedLeafList(times(chars)))).head
 
 
   // Part 3: Decoding
@@ -230,9 +229,7 @@ trait Huffman extends HuffmanInterface:
   def codeBits(table: CodeTable)(char: Char): List[Bit] = 
 
     table match {
-      case x :: xs => 
-        if (x._1.equals(char)) x._2
-        else codeBits(xs)(char)
+      case x :: xs => if (x._1.equals(char)) x._2 else codeBits(xs)(char)
       case _ => Nil
     }
   
@@ -267,13 +264,13 @@ trait Huffman extends HuffmanInterface:
    * use it in the `convert` method above, this merge method might also do some transformations
    * on the two parameter code tables.
    */
-  def mergeCodeTables(a: CodeTable, b: CodeTable): CodeTable = 
+  def mergeCodeTables(left: CodeTable, right: CodeTable): CodeTable = 
     def iter(c: CodeTable, bit: Bit): CodeTable = 
       c match {
         case x :: xs => (x._1, bit :: x._2) :: (iter(xs, bit))
         case _ => Nil
       }
-    iter(a, 0) ++ iter(b, 1)
+    iter(left, 0) ++ iter(right, 1)
 
   /**
    * This function encodes `text` according to the code tree `tree`.
@@ -283,10 +280,10 @@ trait Huffman extends HuffmanInterface:
    */
   def quickEncode(tree: CodeTree)(text: List[Char]): List[Bit] = 
     val t = convert(tree)
-    def iter(table: CodeTable, text: List[Char]): List[Bit] = 
-      table match {
-        case x :: xs => codeBits(List(x))(text.head) ++ iter(xs, text.tail)
+    def iter(text:List[Char], table:CodeTable): List[Bit] = 
+      text match {
+        case x :: xs => codeBits(table)(x) ::: iter(xs, table)
         case _ => Nil
       }
-    iter(t, text)
+    iter(text, t)
 object Huffman extends Huffman
